@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <ctype.h>   // for tolower()
+#include <string.h>  // for strlen()
+
+int main() {
+    char str[200];
+    int i;
+    int alphabet[26] = {0};  // Array to mark letters a-z
+
+    // Input string
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  // read string with spaces
+
+    // Traverse the string
+    for (i = 0; str[i] != '\0'; i++) {
+        char ch = tolower(str[i]);
+
+        if (ch >= 'a' && ch <= 'z') {
+            alphabet[ch - 'a'] = 1;  // Mark the letter as present
+        }
+    }
+
+    // Check if all 26 letters are present
+    int isPangram = 1;
+    for (i = 0; i < 26; i++) {
+        if (alphabet[i] == 0) {
+            isPangram = 0;
+            break;
+        }
+    }
+
+    if (isPangram)
+        printf("The given string is a Pangram.\n");
+    else
+        printf("The given string is NOT a Pangram.\n");
+
+    return 0;
+}
